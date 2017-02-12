@@ -1,4 +1,7 @@
 var speechText;
+var currentAddress;
+var currentLocality;
+var isPositionAnnounced;
 
 /**
  * The callback to prepare a segment for play.
@@ -24,11 +27,12 @@ da.segment.onresume = function () {
       currentSec: currentTime.getSeconds(),
       //address: currentAddress
   };
-  if(speechText == "time") {
+  if(speechText == "what is the time") {
     speechText = speakData.currentTime;
-  } else if(speechText == "date"){
-    speechText = "hello";
-  }
+  } else if(speechText == "what is the date"){
+    speechText = "February 12";
+  } 
+  
   synthesis.speak('The result is ' + speechText, {
       onstart: function () {
           console.log('[SpeechToText] speak start');
@@ -90,7 +94,7 @@ da.segment.onstart = function (trigger, args) {
   } else {
     // API_LEVEL = 2 or later;
     // if(args == ["time"]){
-      synthesis.speak(speakData.currentTime + 'Please say something.', {
+      synthesis.speak('Good morning John', {
         onstart: function () {
           console.log('[SpeechToText] speak start');
         },
