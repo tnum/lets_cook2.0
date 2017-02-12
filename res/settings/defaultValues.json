@@ -1,0 +1,9 @@
+{
+  "defaultValues": {
+    "scope": "talk",
+    "version": "1.0",
+    "settings": {
+      "oauth": false
+    }
+  }
+}
