@@ -27,13 +27,28 @@ da.segment.onresume = function () {
       currentSec: currentTime.getSeconds(),
       //address: currentAddress
   };
-  if(speechText == "what is the time") {
-    speechText = speakData.currentTime;
-  } else if(speechText == "what is the date"){
-    speechText = "February 12";
+  // var instructions = ["start boiled eggs","boiling","cooled"];
+  // var counters = [0,0,0];
+
+  // for(var i = 0; i<instructions.length; i++){
+  //   if(text==instructions[i])
+  //   counters[i]++;
+  // }
+
+  if(speechText == "start boil eggs") {
+    speechText = "Place your eggs in a pot and cover with cold water by 1 inch. Bring to a boil";
   } 
+  else if(speechText == "set timer 10 min"){
+    speechText = "okay, timer set for 10 minutes";
+  } 
+  // alert timer 
+  else if(speechText == "dismiss alert"){
+    speechText = "remove from the heat and set aside 8 to 10 minutes to cool";
+  } else if(speechText == "cooled"){
+    speechText = "Drain, cool in ice water and peel";
+  }
   
-  synthesis.speak('The result is ' + speechText, {
+  synthesis.speak( speechText, {
       onstart: function () {
           console.log('[SpeechToText] speak start');
       },
@@ -93,39 +108,21 @@ da.segment.onstart = function (trigger, args) {
     });
   } else {
     // API_LEVEL = 2 or later;
-    // if(args == ["time"]){
-      synthesis.speak('Good morning John', {
-        onstart: function () {
-          console.log('[SpeechToText] speak start');
-        },
-        onend: function () {
-          console.log('[SpeechToText] speak onend');
+    synthesis.speak('Good morning John', {
+      onstart: function () {
+        console.log('[SpeechToText] speak start');
+      },
+      onend: function () {
+        console.log('[SpeechToText] speak onend');
 
-          var speechToText = new da.SpeechToText();
-          speechToText.startSpeechToText(callbackobject);
-        },
-        onerror: function (error) {
-          console.log('[SpeechToText] speak cancel: ' + error.message);
-          da.stopSegment();
-        }
-      });
-    // } else {
-    //   synthesis.speak('Please say something.', {
-    //     onstart: function () {
-    //       console.log('[SpeechToText] speak start');
-    //     },
-    //     onend: function () {
-    //       console.log('[SpeechToText] speak onend');
-
-    //       var speechToText = new da.SpeechToText();
-    //       speechToText.startSpeechToText(callbackobject);
-    //     },
-    //     onerror: function (error) {
-    //       console.log('[SpeechToText] speak cancel: ' + error.message);
-    //       da.stopSegment();
-    //     }
-    //   });
-    // }
+        var speechToText = new da.SpeechToText();
+        speechToText.startSpeechToText(callbackobject);
+      },
+      onerror: function (error) {
+        console.log('[SpeechToText] speak cancel: ' + error.message);
+        da.stopSegment();
+      }
+    });
   }
 };
 
@@ -156,7 +153,6 @@ var callbackobject = {
       }
     });
   }
-
 };
 
 
