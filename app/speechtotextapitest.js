@@ -24,9 +24,10 @@ da.segment.onresume = function () {
       currentSec: currentTime.getSeconds(),
       //address: currentAddress
   };
-  if(speechText == "time")
-  {
+  if(speechText == "time") {
     speechText = speakData.currentTime;
+  } else if(speechText == "date"){
+    speechText = "hello";
   }
   synthesis.speak('The result is ' + speechText, {
       onstart: function () {
